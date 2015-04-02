@@ -93,10 +93,6 @@ SELECT * FROM Site JOIN Visited ON Site.name=Visited.site;
 
 `ON` does the same job as `WHERE`:
 it only keeps records that pass some test.
-(The difference between the two is that `ON` filters records
-as they're being created,
-while `WHERE` waits until the join is done
-and then does the filtering.)
 Once we add this to our query,
 the database manager throws away records
 that combined information about two different sites,
