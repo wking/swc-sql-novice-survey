@@ -143,7 +143,7 @@ The output should look like this:
 
 ~~~ {.bash}
 CREATE TABLE Person(
-       ident    text,
+       id       text,
        personal text,
        family	 text
 );
@@ -153,7 +153,7 @@ CREATE TABLE Site(
        long real
 );
 CREATE TABLE Visited(
-       ident integer,
+       id    integer,
        site  text,
        dated text
 );
