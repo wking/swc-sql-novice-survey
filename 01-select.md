@@ -47,7 +47,7 @@ The tables below show the database we will use in our examples:
 
 > **Person**: people who took readings.
 >
-> |ident   |personal |family
+> |id      |personal |family
 > |--------|---------|----------
 > |dyer    |William  |Dyer
 > |pb      |Frank    |Pabodie
@@ -65,7 +65,7 @@ The tables below show the database we will use in our examples:
 
 > **Visited**: when readings were taken at specific sites.
 >
-> |ident|site |dated     |
+> |id   |site |dated     |
 > |-----|-----|----------|
 > |619  |DR-1 |1927-02-08|
 > |622  |DR-1 |1927-02-10|
@@ -124,7 +124,7 @@ SELECT family, personal FROM Person;
 |Roerich |Valentina|
 |Danforth|Frank    |
 
-The semi-colon at the end of the query
+The semicolon at the end of the query
 tells the database manager that the query is complete and ready to run.
 We have written our commands and column names in lower case,
 and the table name in Title Case,
@@ -174,10 +174,10 @@ SELECT personal, family FROM Person;
 or even repeat columns:
 
 ~~~ {.sql}
-SELECT ident, ident, ident FROM Person;
+SELECT id, id, id FROM Person;
 ~~~
 
-|ident   |ident   |ident   |
+|id      |id      |id      |
 |--------|--------|--------|
 |dyer    |dyer    |dyer    |
 |pb      |pb      |pb      |
@@ -192,7 +192,7 @@ we can select all of the columns in a table using `*`:
 SELECT * FROM Person;
 ~~~
 
-|ident   |personal |family  |
+|id      |personal |family  |
 |--------|---------|--------|
 |dyer    |William  |Dyer    |
 |pb      |Frank    |Pabodie |

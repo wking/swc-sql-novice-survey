@@ -10,7 +10,6 @@ minutes: 30
 > *   Explain how to restrict the output of a query containing a join to only include meaningful combinations of values.
 > *   Write queries that join tables on equal keys.
 > *   Explain what primary and foreign keys are, and why they are useful.
-> *   Explain what atomic values are, and why database fields should only contain atomic values.
 
 In order to submit her data to a web site
 that aggregates historical meteorological data,
@@ -30,7 +29,7 @@ let's start by joining the `Site` and `Visited` tables:
 SELECT * FROM Site JOIN Visited;
 ~~~
 
-|name |lat   |long   |ident|site  |dated     |
+|name |lat   |long   |id   |site  |dated     |
 |-----|------|-------|-----|------|----------|
 |DR-1 |-49.85|-128.57|619  |DR-1  |1927-02-08|
 |DR-1 |-49.85|-128.57|622  |DR-1  |1927-02-10|
@@ -81,7 +80,7 @@ thus we need to use a filter:
 SELECT * FROM Site JOIN Visited ON Site.name=Visited.site;
 ~~~
 
-|name |lat   |long   |ident|site |dated     |
+|name |lat   |long   |id   |site |dated     |
 |-----|------|-------|-----|-----|----------|
 |DR-1 |-49.85|-128.57|619  |DR-1 |1927-02-08|
 |DR-1 |-49.85|-128.57|622  |DR-1 |1927-02-10|
@@ -94,22 +93,18 @@ SELECT * FROM Site JOIN Visited ON Site.name=Visited.site;
 
 `ON` does the same job as `WHERE`:
 it only keeps records that pass some test.
-(The difference between the two is that `ON` filters records
-as they're being created,
-while `WHERE` waits until the join is done
-and then does the filtering.)
 Once we add this to our query,
 the database manager throws away records
 that combined information about two different sites,
 leaving us with just the ones we want.
 
-Notice that we used `table.field` to specify field names
+Notice that we used `Table.field` to specify field names
 in the output of the join.
 We do this because tables can have fields with the same name,
 and we need to be specific which ones we're talking about.
 For example,
-if we joined the `person` and `visited` tables,
-the result would inherit a field called `ident`
+if we joined the `Person` and `Visited` tables,
+the result would inherit a field called `id`
 from each of the original tables.
 
 We can now use the same dotted notation
@@ -137,16 +132,16 @@ If joining two tables is good,
 joining many tables must be better.
 In fact,
 we can join any number of tables
-simply by adding more `join` clauses to our query,
+simply by adding more `JOIN` clauses to our query,
 and more `ON` tests to filter out combinations of records
 that don't make sense:
 
 ~~~ {.sql}
 SELECT Site.lat, Site.long, Visited.dated, Survey.quant, Survey.reading
-FROM   Site JOIN Visited JOIN Survey
-ON     Site.name=Visited.site
-AND    Visited.ident=Survey.taken
-AND    Visited.dated IS NOT NULL;
+FROM   Site
+JOIN   Visited ON Site.name=Visited.site
+JOIN   Survey ON Visited.id=Survey.taken
+WHERE  Visited.dated IS NOT NULL;
 ~~~
 
 |lat   |long   |dated     |quant|reading|
@@ -183,7 +178,7 @@ Another way of saying this is that
 a foreign key is the primary key of one table
 that appears in some other table.
 In our database,
-`Person.ident` is the primary key in the `Person` table,
+`Person.id` is the primary key in the `Person` table,
 while `Survey.person` is a foreign key
 relating the `Survey` table's entries
 to entries in `Person`.
@@ -201,14 +196,14 @@ those IDs have names like "student numbers" and "patient numbers",
 and they almost always turn out to have originally been
 a unique record identifier in some database system or other.
 As the query below demonstrates,
-SQLite automatically numbers records as they're added to tables,
+SQLite [automatically numbers records][rowid] as they're added to tables,
 and we can use those record numbers in queries:
 
 ~~~ {.sql}
 SELECT rowid, * FROM Person;
 ~~~
 
-|rowid|ident   |personal |family  |
+|rowid|id      |personal |family  |
 |-----|--------|---------|--------|
 |1    |dyer    |William  |Dyer    |
 |2    |pb      |Frank    |Pabodie |
@@ -234,8 +229,10 @@ SELECT rowid, * FROM Person;
 > ~~~
 
 > ## Who has been where? {.challenge}
+>
 > Write a query that shows each site with exact location (lat, long) ordered by visited date, 
 > followed by personal name and family name of the person who visited the site 
 > and the type of measurement taken and its reading. Please avoid all null values.
 > Tip: you should get 15 records with 8 fields.
 
+[rowid]: https://www.sqlite.org/lang_createtable.html#rowid

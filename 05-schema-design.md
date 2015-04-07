@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Databases and SQL
-subtitle: Data Hygiene
+subtitle: Schema Design
 minutes: 30
 ---
 > ## Learning Objectives {.objectives}
@@ -28,7 +28,7 @@ just think of a name like "Eloise St. Cyr" or "Jan Mikkel Steubart".
 
 The second rule is that every record should have a unique primary key.
 This can be a serial number that has no intrinsic meaning,
-one of the values in the record (like the `ident` field in the `Person` table),
+one of the values in the record (like the `id` field in the `Person` table),
 or even a combination of values:
 the triple `(taken, person, quant)` from the `Survey` table uniquely identifies every measurement.
 
@@ -36,7 +36,7 @@ The third rule is that there should be no redundant information.
 For example,
 we could get rid of the `Site` table and rewrite the `Visited` table like this:
 
-|ident|lat   |long   |dated      |
+|id   |lat   |long   |dated      |
 |-----|------|-------|-----------|
 |619  |-49.85|-128.57| 1927-02-08|
 |622  |-49.85|-128.57| 1927-02-10|
@@ -68,8 +68,7 @@ Stepping back,
 data and the tools used to store it have a symbiotic relationship:
 we use tables and joins because it's efficient,
 provided our data is organized a certain way,
-but organize our data that way because we have tools to manipulate it efficiently
-if it's in a certain form.
+but organize our data that way because we have tools to manipulate it efficiently.
 As anthropologists say,
 the tool shapes the hand that shapes the tool.
 

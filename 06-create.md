@@ -6,8 +6,8 @@ minutes: 30
 ---
 > ## Learning Objectives {.objectives}
 >
-> *   Write queries that creates tables.
-> *   Write queries to insert, modify, and delete records.
+> *   Write commands that creates tables.
+> *   Write commands to insert, modify, and delete records.
 
 So far we have only looked at how to get information out of a database,
 both because that is more frequent than adding information,
@@ -16,7 +16,7 @@ once queries are understood.
 If we want to create and modify data,
 we need to know two other sets of commands.
 
-The first pair are `CREATE TABLE` and `DROP TABLE`.
+The first pair are [`CREATE TABLE`][CREATE-TABLE] and [`DROP TABLE`][DROP-TABLE].
 While they are written as two words,
 they are actually single commands.
 The first one creates a new table;
@@ -25,9 +25,9 @@ For example,
 the following statements create the four tables in our survey database:
 
 ~~~ {.sql}
-CREATE TABLE Person(ident text, personal text, family text);
+CREATE TABLE Person(id text, personal text, family text);
 CREATE TABLE Site(name text, lat real, long real);
-CREATE TABLE Visited(ident integer, site text, dated text);
+CREATE TABLE Visited(id integer, site text, dated text);
 CREATE TABLE Survey(taken integer, person text, quant real, reading real);
 ~~~
 
@@ -72,8 +72,8 @@ CREATE TABLE Survey(
     quant   real not null,    -- the quantity measured
     reading real not null,    -- the actual reading
     primary key(taken, quant),
-    foreign key(taken) references Visited(ident),
-    foreign key(person) references Person(ident)
+    foreign key(taken) references Visited(id),
+    foreign key(person) references Person(id)
 );
 ~~~
 
@@ -126,7 +126,7 @@ once we realize that Frank Danforth didn't take any measurements,
 we can remove him from the `Person` table like this:
 
 ~~~ {.sql}
-DELETE FROM Person WHERE ident = 'danforth';
+DELETE FROM Person WHERE id = 'danforth';
 ~~~
 
 But what if we removed Anderson Lake instead?
@@ -195,3 +195,6 @@ this technique is outside the scope of this chapter.
 > control is a good way to track and manage changes to the database.
 > What are the pros and cons of this approach?  (Hint: records aren't
 > stored in any particular order.)
+
+[CREATE-TABLE]: https://www.sqlite.org/lang_createtable.html
+[DROP-TABLE]: https://www.sqlite.org/lang_droptable.html
