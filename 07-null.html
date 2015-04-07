@@ -45,7 +45,7 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">ident</th>
+<th align="left">id</th>
 <th align="left">site</th>
 <th align="left">dated</th>
 </tr>
@@ -64,7 +64,7 @@
 <tr class="odd">
 <td align="left">734</td>
 <td align="left">DR-3</td>
-<td align="left">1939-01-07</td>
+<td align="left">1930-01-07</td>
 </tr>
 <tr class="even">
 <td align="left">735</td>
@@ -94,11 +94,11 @@
 </tbody>
 </table>
 <p>Null doesn't behave like other values. If we select the records that come before 1930:</p>
-<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> Visited <span class="kw">WHERE</span> dated&lt;<span class="ot">&quot;1930-01-01&quot;</span>;</code></pre>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> Visited <span class="kw">WHERE</span> dated&lt;<span class="st">&#39;1930-01-01&#39;</span>;</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">ident</th>
+<th align="left">id</th>
 <th align="left">site</th>
 <th align="left">dated</th>
 </tr>
@@ -117,11 +117,11 @@
 </tbody>
 </table>
 <p>we get two results, and if we select the ones that come during or after 1930:</p>
-<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> Visited <span class="kw">WHERE</span> dated&gt;=<span class="ot">&quot;1930-01-01&quot;</span>;</code></pre>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> * <span class="kw">FROM</span> Visited <span class="kw">WHERE</span> dated&gt;=<span class="st">&#39;1930-01-01&#39;</span>;</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">ident</th>
+<th align="left">id</th>
 <th align="left">site</th>
 <th align="left">dated</th>
 </tr>
@@ -130,7 +130,7 @@
 <tr class="odd">
 <td align="left">734</td>
 <td align="left">DR-3</td>
-<td align="left">1939-01-07</td>
+<td align="left">1930-01-07</td>
 </tr>
 <tr class="even">
 <td align="left">735</td>
@@ -164,7 +164,7 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">ident</th>
+<th align="left">id</th>
 <th align="left">site</th>
 <th align="left">dated</th>
 </tr>
@@ -182,7 +182,7 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">ident</th>
+<th align="left">id</th>
 <th align="left">site</th>
 <th align="left">dated</th>
 </tr>
@@ -201,7 +201,7 @@
 <tr class="odd">
 <td align="left">734</td>
 <td align="left">DR-3</td>
-<td align="left">1939-01-07</td>
+<td align="left">1930-01-07</td>
 </tr>
 <tr class="even">
 <td align="left">735</td>
