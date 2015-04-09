@@ -50,34 +50,28 @@
 <li>FIXME</li>
 </ul>
 <h2 id="filtering"><a href="03-filter.html">Filtering</a></h2>
+<p>We're suggesting that learners lookup the more esoteric query manipulations as they find a need for them (because listing a bunch in the lesson is not very exciting without a need to motivate them). That can be intimidating for a new user, so you should spend some time showing students how to lookup documentation online, find the relevant section of the documentation, and then understand what they're reading. You should definitely do this for <code>LIKE</code> (which is the last thing we cover before recommending this approach, so it's fresh in their minds), but you might want to also go over <code>DISTINCT</code> (if you feel like the learners are bored, and want to speed up and hit something new) or <code>ORDER BY</code> (if you feel like the learners are confused, and want to slow down and review something old).</p>
+<h2 id="combining-data"><a href="04-join.html">Combining Data</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
-<h2 id="calculating-new-values"><a href="04-calc.html">Calculating New Values</a></h2>
+<h2 id="schema-design"><a href="05-schema-design.html">Schema Design</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
-<h2 id="missing-data"><a href="05-null.html">Missing Data</a></h2>
+<h2 id="creating-and-modifying-data"><a href="06-create.html">Creating and Modifying Data</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
-<h2 id="aggregation"><a href="06-agg.html">Aggregation</a></h2>
+<h2 id="missing-data"><a href="07-null.html">Missing Data</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
-<h2 id="combining-data"><a href="07-join.html">Combining Data</a></h2>
+<h2 id="aggregation"><a href="08-agg.html">Aggregation</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
-<h2 id="data-hygiene"><a href="08-hygiene.html">Data Hygiene</a></h2>
-<ul>
-<li>FIXME</li>
-</ul>
-<h2 id="creating-and-modifying-data"><a href="09-create.html">Creating and Modifying Data</a></h2>
-<ul>
-<li>FIXME</li>
-</ul>
-<h2 id="programming-with-databases"><a href="10-prog.html">Programming with Databases</a></h2>
+<h2 id="programming-with-databases"><a href="09-prog.html">Programming with Databases</a></h2>
 <ul>
 <li>FIXME</li>
 </ul>
@@ -95,14 +89,14 @@
 <p>In order to execute the following lessons interactively, please install SQLite as mentioned in the setup instructions for your workshop, then create a directory <code>swc_sql</code>:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">mkdir</span> swc_sql
 $ <span class="kw">cd</span> swc_sql</code></pre>
-<p>Next, download the SQL file <code>survey.sql</code> from <a href="http://files.software-carpentry.org/survey.sql" class="uri">http://files.software-carpentry.org/survey.sql</a> and the database file <code>survey.db</code> from <a href="http://files.software-carpentry.org/survey.db" class="uri">http://files.software-carpentry.org/survey.db</a> and move both files to your <code>swc_sql</code> directory. When you are done, <code>ls</code> should show that they are present:</p>
+<p>Next, download the SQL file <code>survey.sql</code> from <a href="http://files.software-carpentry.org/survey.sql">http://files.software-carpentry.org/survey.sql</a> and the database file <code>survey.db</code> from <a href="http://files.software-carpentry.org/survey.db">http://files.software-carpentry.org/survey.db</a> and move both files to your <code>swc_sql</code> directory. When you are done, <code>ls</code> should show that they are present:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ls</span>
 <span class="kw">survey.db</span>    survey.sql</code></pre>
 <p>To test that your version of SQLite can read the database, run this command:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sqlite3</span> survey.db .schema</code></pre>
 <p>(You <em>must</em> include the period at the start of <code>.schema</code>.) The output should look like this:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">CREATE</span> TABLE Person(
-       <span class="kw">ident</span>    text,
+       <span class="kw">id</span>       text,
        <span class="kw">personal</span> text,
        <span class="kw">family</span>    text
 );
@@ -112,7 +106,7 @@ $ <span class="kw">cd</span> swc_sql</code></pre>
        <span class="kw">long</span> real
 );
 <span class="kw">CREATE</span> TABLE Visited(
-       <span class="kw">ident</span> integer,
+       <span class="kw">id</span>    integer,
        <span class="kw">site</span>  text,
        <span class="kw">dated</span> text
 );
